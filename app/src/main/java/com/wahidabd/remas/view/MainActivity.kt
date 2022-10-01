@@ -1,7 +1,8 @@
-package com.wahidabd.remas
+package com.wahidabd.remas.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.wahidabd.remas.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

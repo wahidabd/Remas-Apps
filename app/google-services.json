@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "372952864555",
+    "project_id": "remas-1b450",
+    "storage_bucket": "remas-1b450.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372952864555:android:0b78227802ec1fb739d76e",
+        "android_client_info": {
+          "package_name": "com.wahidabd.remas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372952864555-rlapgvt905ain93iunm9autn74dtij4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wahidabd.remas",
+            "certificate_hash": "c78939303360e2c2029bd4018f4db5eb453f7262"
+          }
+        },
+        {
+          "client_id": "372952864555-oefq2v20tvp9rf84ivdihnrndbk12a5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl2T07jkbPm2XpmSx2hQy0GAj9sPCR-ZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372952864555-oefq2v20tvp9rf84ivdihnrndbk12a5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
