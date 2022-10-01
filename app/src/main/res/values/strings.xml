@@ -2,4 +2,7 @@
     <string name="app_name">Remas</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_body_login">Aplikasi Monitoring Pengguna Narkotika</string>
+    <string name="hint_email">Masukkan Email Anda</string>
+    <string name="hint_password">Masukkan Password Anda</string>
 </resources>
