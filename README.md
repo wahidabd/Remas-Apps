@@ -1,3 +1,3 @@
 # Remas-Apps
 
-## a proyek from software management
+## a proyek fom software management
