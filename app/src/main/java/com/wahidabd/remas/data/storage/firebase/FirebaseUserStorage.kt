@@ -33,7 +33,7 @@ class FirebaseUserStorage : UserStorage {
                                         val data = snapshot.getValue(User::class.java)
                                         if (data != null) trySend(Response.Success(data))
                                     } else {
-                                        trySend(Response.Error(e = Exception("User not found!")))
+                                        trySend(Response.Error(e = Exception(Constants.MESSAGE.USER_NOT_FOUND)))
                                     }
                                 }
 
@@ -42,10 +42,10 @@ class FirebaseUserStorage : UserStorage {
                                 }
                             })
                     } else {
-                        trySend(Response.Error(e = Exception("Email anda belum diverifikasi!")))
+                        trySend(Response.Error(e = Exception(Constants.MESSAGE.EMAIL_NOT_VERIFIED)))
                     }
                 } else {
-                    trySend(Response.Error(e = Exception("Gagal login, silahkan coba lagi!")))
+                    trySend(Response.Error(e = Exception(Constants.MESSAGE.WRONG_LOGIN)))
                 }
             }
 
@@ -63,12 +63,19 @@ class FirebaseUserStorage : UserStorage {
                     if (task.isSuccessful) {
                         val id = auth.currentUser?.uid
 
-                        user.child(id.toString()).setValue(request).addOnSuccessListener {
+                        val hashMap: HashMap<String, Any> = HashMap()
+                        hashMap["id"] = id.toString()
+                        hashMap["name"] = request.name
+                        hashMap["email"] = request.email
+                        hashMap["role"] = request.role
+
+                        user.child(id.toString()).setValue(hashMap).addOnSuccessListener {
                             val response = GenericResponse(
                                 status = true,
                                 message = "Berhasil mendaftar, silahkan cek email atau folder spam pada email ${request.email}"
                             )
                             trySend(Response.Success(response))
+                            auth.currentUser?.sendEmailVerification()
                         }
                     }else{
                         trySend(Response.Error(e = Exception("Gagal mendaftar, coba beberapa saat lagi")))

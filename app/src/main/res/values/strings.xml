@@ -5,4 +5,15 @@
     <string name="text_body_login">Aplikasi Monitoring Pengguna Narkotika</string>
     <string name="hint_email">Masukkan Email Anda</string>
     <string name="hint_password">Masukkan Password Anda</string>
+    <string name="forgot_password">Lupa password?</string>
+    <string name="login">Masuk</string>
+    <string name="do_not_have_account">Belum punya akun?</string>
+    <string name="register_here">Daftar disini</string>
+    <string name="welcome">Selamat Datang</string>
+    <string name="please_fill_your_biodata">Silahkan isi biodata anda jika belum mempunya akun</string>
+    <string name="hint_name">Masukan Nama Anda</string>
+    <string name="hint_confirm_password">Konformasi password anda</string>
+    <string name="create_account">Buat Akun</string>
+    <string name="have_an_account">Sudah punya akun?</string>
+    <string name="login_here">Masuk disini</string>
 </resources>

@@ -5,6 +5,7 @@ import com.wahidabd.remas.data.repository.UserRepositoryImpl
 import com.wahidabd.remas.data.storage.UserStorage
 import com.wahidabd.remas.data.storage.firebase.FirebaseUserStorage
 import com.wahidabd.remas.domain.repository.UserRepository
+import com.wahidabd.remas.utils.Loading
 import com.wahidabd.remas.utils.MySharedPreferences
 import dagger.Module
 import dagger.Provides
@@ -19,12 +20,16 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideLoading() = Loading()
+
+    @Provides
+    @Singleton
     fun provideMySharedPreferences(@ApplicationContext context: Context) =
         MySharedPreferences(context)
 
     @Provides
     @Singleton
-    fun provideUserStorage() = FirebaseUserStorage()
+    fun provideUserStorage(): UserStorage = FirebaseUserStorage()
 
     @Provides
     @Singleton
