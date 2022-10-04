@@ -16,4 +16,9 @@
     <string name="create_account">Buat Akun</string>
     <string name="have_an_account">Sudah punya akun?</string>
     <string name="login_here">Masuk disini</string>
+    <string name="home">Beranda</string>
+    <string name="chat">Pesan</string>
+    <string name="report">Laporan</string>
+    <string name="profile">Profil</string>
+    <string name="hint_reset_password">Reset Password</string>
 </resources>

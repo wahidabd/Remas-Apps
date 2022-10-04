@@ -11,6 +11,9 @@ interface UserStorage {
 
     suspend fun login(request: LoginRequest): Flow<Response<User>>
     suspend fun register(request: RegisterRequest): Flow<Response<GenericResponse>>
+    suspend fun resetPassword(email: String): Flow<Response<GenericResponse>>
     suspend fun userDetail(id: String): Flow<Response<User>>
+    suspend fun userList(): Flow<Response<ArrayList<User>>>
+
 
 }

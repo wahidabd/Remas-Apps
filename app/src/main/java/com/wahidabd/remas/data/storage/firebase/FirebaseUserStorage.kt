@@ -86,6 +86,24 @@ class FirebaseUserStorage : UserStorage {
             awaitClose { this.close() }
         }
 
+    override suspend fun resetPassword(email: String): Flow<Response<GenericResponse>> = callbackFlow {
+        trySend(Response.Loading())
+
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+            if (task.isSuccessful){
+                val response = GenericResponse(status = true, message = "Link reset passwor sudah dikirim email anda, silahkan cek di folder utama/spam")
+                trySend(Response.Success(response))
+            }
+        }
+
+            .addOnFailureListener {
+                trySend(Response.Error(e = Exception(it.message)))
+            }
+
+        awaitClose { this.close() }
+    }
+
     override suspend fun userDetail(id: String): Flow<Response<User>> = callbackFlow {
 
         trySend(Response.Loading())
@@ -100,6 +118,28 @@ class FirebaseUserStorage : UserStorage {
                 trySend(Response.Error(error.toException()))
             }
         })
+        awaitClose { this.close() }
+    }
+
+    override suspend fun userList(): Flow<Response<ArrayList<User>>> = callbackFlow {
+        trySend(Response.Loading())
+
+        user.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val list = ArrayList<User>()
+
+                snapshot.children.forEach {
+                    val user = it.getValue(User::class.java)
+                    if (user != null) list.add(user)
+                }
+                trySend(Response.Success(list))
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                trySend(Response.Error(error.toException()))
+            }
+        })
+
         awaitClose { this.close() }
     }
 

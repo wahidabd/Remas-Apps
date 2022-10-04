@@ -20,7 +20,13 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun register(request: RegisterRequest): Flow<Response<GenericResponse>> =
         storage.register(request)
 
+    override suspend fun resetPassword(email: String): Flow<Response<GenericResponse>> =
+        storage.resetPassword(email)
+
     override suspend fun userDetail(id: String): Flow<Response<User>> =
         storage.userDetail(id)
+
+    override suspend fun userList(): Flow<Response<ArrayList<User>>> =
+        storage.userList()
 
 }

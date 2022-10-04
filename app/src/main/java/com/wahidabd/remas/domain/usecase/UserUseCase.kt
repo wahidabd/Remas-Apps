@@ -18,6 +18,11 @@ class UserUseCase @Inject constructor(
     suspend fun register(request: RegisterRequest): Flow<Response<GenericResponse>> =
         repo.register(request)
 
+    suspend fun resetPassword(email: String): Flow<Response<GenericResponse>> =
+        repo.resetPassword(email)
+
     suspend fun userDetail(id: String): Flow<Response<User>> = repo.userDetail(id)
+
+    suspend fun userList(): Flow<Response<ArrayList<User>>> = repo.userList()
 
 }
