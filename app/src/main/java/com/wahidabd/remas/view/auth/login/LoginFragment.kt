@@ -103,7 +103,7 @@ class LoginFragment : Fragment() {
                         prefs.setLogin(true)
                         prefs.setUser(res.data)
 
-                        // switch to main activity
+                        // go to main activity
                         startActivity(Intent(requireActivity(), MainActivity::class.java))
                         activity?.finish()
                     }
