@@ -1,7 +1,7 @@
 package com.wahidabd.remas.utils
 
 import android.content.Context
-import com.wahidabd.remas.data.models.User
+import com.wahidabd.remas.domain.models.User
 
 class MySharedPreferences(context: Context) {
 
@@ -14,6 +14,7 @@ class MySharedPreferences(context: Context) {
         private const val IMAGE = "image"
         private const val ROLE = "role"
         private const val LOGIN = "login"
+        private const val FCM = "fcm"
     }
 
     private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -31,8 +32,8 @@ class MySharedPreferences(context: Context) {
     fun getUser(): User =
         User(
             id = prefs.getString(ID, "").toString(),
-            name = prefs.getString(ID, "").toString(),
-            email = prefs.getString(ID, "").toString(),
+            name = prefs.getString(NAME, "").toString(),
+            email = prefs.getString(EMAIL, "").toString(),
             image = prefs.getString(IMAGE, "").toString(),
             role = prefs.getInt(ROLE, 0)
         )

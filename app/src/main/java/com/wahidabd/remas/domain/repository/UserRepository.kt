@@ -1,7 +1,7 @@
 package com.wahidabd.remas.domain.repository
 
 import com.wahidabd.remas.core.Response
-import com.wahidabd.remas.data.models.User
+import com.wahidabd.remas.domain.models.User
 import com.wahidabd.remas.data.request.auth.LoginRequest
 import com.wahidabd.remas.data.request.auth.RegisterRequest
 import com.wahidabd.remas.data.response.GenericResponse
@@ -13,5 +13,5 @@ interface UserRepository {
     suspend fun register(request: RegisterRequest): Flow<Response<GenericResponse>>
     suspend fun resetPassword(email: String): Flow<Response<GenericResponse>>
     suspend fun userDetail(id: String): Flow<Response<User>>
-    suspend fun userList(): Flow<Response<ArrayList<User>>>
+    suspend fun userList(id: String): Flow<Response<ArrayList<User>>>
 }

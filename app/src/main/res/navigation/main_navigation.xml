@@ -14,7 +14,14 @@
         android:id="@+id/chatFragment"
         android:name="com.wahidabd.remas.view.chat.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_listUserFragment"
+            app:destination="@id/listUserFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_chatRoomFragment"
+            app:destination="@id/chatRoomFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reportFragment"
         android:name="com.wahidabd.remas.view.report.ReportFragment"
@@ -25,4 +32,30 @@
         android:name="com.wahidabd.remas.view.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/listUserFragment"
+        android:name="com.wahidabd.remas.view.chat.ListUserFragment"
+        android:label="fragment_list_user"
+        tools:layout="@layout/fragment_list_user" >
+        <action
+            android:id="@+id/action_listUserFragment_to_chatRoomFragment"
+            app:destination="@id/chatRoomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatRoomFragment"
+        android:name="com.wahidabd.remas.view.chat.ChatRoomFragment"
+        android:label="fragment_chat_room"
+        tools:layout="@layout/fragment_chat_room" >
+        <argument
+            android:name="user_id"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="user_name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="user_image"
+            app:argType="string" />
+    </fragment>
 </navigation>

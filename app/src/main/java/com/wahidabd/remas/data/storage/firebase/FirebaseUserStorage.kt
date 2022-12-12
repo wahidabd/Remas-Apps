@@ -6,7 +6,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.wahidabd.remas.core.Response
-import com.wahidabd.remas.data.models.User
+import com.wahidabd.remas.domain.models.User
 import com.wahidabd.remas.data.request.auth.LoginRequest
 import com.wahidabd.remas.data.request.auth.RegisterRequest
 import com.wahidabd.remas.data.response.GenericResponse
@@ -121,7 +121,7 @@ class FirebaseUserStorage : UserStorage {
         awaitClose { this.close() }
     }
 
-    override suspend fun userList(): Flow<Response<ArrayList<User>>> = callbackFlow {
+    override suspend fun userList(id: String): Flow<Response<ArrayList<User>>> = callbackFlow {
         trySend(Response.Loading())
 
         user.addValueEventListener(object : ValueEventListener{
@@ -130,7 +130,7 @@ class FirebaseUserStorage : UserStorage {
 
                 snapshot.children.forEach {
                     val user = it.getValue(User::class.java)
-                    if (user != null) list.add(user)
+                    if (user != null && user.id != id) list.add(user)
                 }
                 trySend(Response.Success(list))
             }
@@ -142,6 +142,8 @@ class FirebaseUserStorage : UserStorage {
 
         awaitClose { this.close() }
     }
+
+
 
     companion object {
         private val auth = FirebaseAuth.getInstance()

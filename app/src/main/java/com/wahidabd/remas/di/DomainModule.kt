@@ -1,6 +1,8 @@
 package com.wahidabd.remas.di
 
+import com.wahidabd.remas.domain.repository.ChatRepository
 import com.wahidabd.remas.domain.repository.UserRepository
+import com.wahidabd.remas.domain.usecase.ChatUseCase
 import com.wahidabd.remas.domain.usecase.UserUseCase
 import dagger.Module
 import dagger.Provides
@@ -15,5 +17,9 @@ object DomainModule {
     @Provides
     @Singleton
     fun provideUserUseCase(repo: UserRepository) = UserUseCase(repo)
+
+    @Provides
+    @Singleton
+    fun provideChatUseCase(repo: ChatRepository) = ChatUseCase(repo)
 
 }

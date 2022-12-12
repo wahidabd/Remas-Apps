@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
     tools:context=".view.chat.ChatFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="22dp"
+            android:gravity="center"
+            android:background="@drawable/bg_rectangle_white_50">
+
+            <EditText
+                android:id="@+id/edt_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:paddingHorizontal="12dp"
+                android:hint="Cari ...."
+                android:fontFamily="@font/poppins"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/img_search"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="4dp"
+                android:layout_marginEnd="12dp"
+                app:tint="@color/shades_blue"
+                android:background="@drawable/ripple_round_gray_white"
+                android:src="@drawable/ic_search"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_add_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_recatngle_main_blue_50"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center_vertical"
+                android:paddingStart="60dp"
+                android:text="Buat Pesan"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:id="@+id/img_add_chat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_add"
+                android:padding="8dp"
+                app:tint="@color/main_blue"
+                android:background="@drawable/ripple_round_gray_white"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

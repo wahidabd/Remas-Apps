@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".view.chat.ListUserFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_recatngle_main_blue_50"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center_vertical"
+            android:paddingStart="60dp"
+            android:text="Pilih Kontak"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageView
+            android:id="@+id/img_add_chat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_arrow_back"
+            android:padding="8dp"
+            android:backgroundTint="@color/shades_blue"
+            app:tint="@color/white"
+            android:background="@drawable/ripple_round_gray_white"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_recatngle_main_blue_50"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center_vertical"
+            android:paddingStart="60dp"
+            android:text="Buat Group"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageView
+            android:id="@+id/img_create_group"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_group"
+            android:padding="10dp"
+            app:tint="@color/main_blue"
+            android:background="@drawable/ripple_round_gray_white"/>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_user_list"
+        android:layout_marginHorizontal="14dp"
+        tools:itemCount="4"
+        android:paddingTop="12dp"/>
+
+</LinearLayout>

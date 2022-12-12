@@ -2,6 +2,8 @@ package com.wahidabd.remas.utils
 
 object Constants {
 
+    const val STATIC_IMAGE = "https://www.its.ac.id/international/wp-content/uploads/sites/66/2020/02/blank-profile-picture-973460_1280.jpg"
+
     object MESSAGE {
         const val EMAIL_IS_NOT_EMPTY = "Email tidak boleh kosong"
         const val EMAIL_IS_NOT_VALID = "Email tidak valid"
@@ -16,6 +18,8 @@ object Constants {
 
     object TABLE {
         const val USER = "user"
+        const val CHAT = "chat"
+        const val CHAT_ROOM = "_chat_room"
     }
 
 }

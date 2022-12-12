@@ -2,7 +2,7 @@ package com.wahidabd.remas.viewmodel
 
 import androidx.lifecycle.*
 import com.wahidabd.remas.core.Response
-import com.wahidabd.remas.data.models.User
+import com.wahidabd.remas.domain.models.User
 import com.wahidabd.remas.data.request.auth.LoginRequest
 import com.wahidabd.remas.data.request.auth.RegisterRequest
 import com.wahidabd.remas.data.response.GenericResponse
@@ -29,7 +29,7 @@ class UserViewModel @Inject constructor(
     suspend fun user(id: String): LiveData<Response<User>> =
         useCase.userDetail(id).asLiveData()
 
-    suspend fun userList(): LiveData<Response<ArrayList<User>>> =
-        useCase.userList().asLiveData()
+    suspend fun userList(id: String): LiveData<Response<ArrayList<User>>> =
+        useCase.userList(id).asLiveData()
 
 }

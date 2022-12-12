@@ -1,7 +1,7 @@
 package com.wahidabd.remas.data.repository
 
 import com.wahidabd.remas.core.Response
-import com.wahidabd.remas.data.models.User
+import com.wahidabd.remas.domain.models.User
 import com.wahidabd.remas.data.request.auth.LoginRequest
 import com.wahidabd.remas.data.request.auth.RegisterRequest
 import com.wahidabd.remas.data.response.GenericResponse
@@ -26,7 +26,7 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun userDetail(id: String): Flow<Response<User>> =
         storage.userDetail(id)
 
-    override suspend fun userList(): Flow<Response<ArrayList<User>>> =
-        storage.userList()
+    override suspend fun userList(id: String): Flow<Response<ArrayList<User>>> =
+        storage.userList(id)
 
 }

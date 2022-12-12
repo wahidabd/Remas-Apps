@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:layout_marginStart="16dp"
+    android:background="@drawable/bg_chat_left"
+    android:layout_marginEnd="90dp"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="4dp">
+
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_message"
+        android:fontFamily="@font/poppins"
+        android:textSize="8sp"
+        android:textColor="@color/black_70"
+        tools:text="Hari ini, 20.32" />
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black_70"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nilai A ya ibu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
