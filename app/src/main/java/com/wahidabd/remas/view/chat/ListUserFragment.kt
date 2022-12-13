@@ -47,6 +47,8 @@ class ListUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.ivBack.setOnClickListener { findNavController().navigateUp() }
+
         mAdapter = UserListAdapter()
         binding.rvUser.apply {
             adapter = mAdapter

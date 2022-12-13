@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".view.report.ReportFragment">
+    tools:context=".view.report.CreateReportFragment">
 
     <RelativeLayout
         android:id="@+id/relative_add_report"
@@ -23,7 +23,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center_vertical"
             android:paddingStart="60dp"
-            android:text="Buat Laporan"
+            android:text="Buat Pesan"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"

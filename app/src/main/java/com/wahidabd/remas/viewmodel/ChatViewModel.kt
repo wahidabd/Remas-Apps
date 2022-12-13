@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.wahidabd.remas.core.Response
 import com.wahidabd.remas.data.request.chat.ChatRoomRequest
+import com.wahidabd.remas.data.response.chat.ChatRoomResponse
 import com.wahidabd.remas.data.response.chat.UserChatGroupResponse
 import com.wahidabd.remas.domain.usecase.ChatUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,4 +21,6 @@ class ChatViewModel @Inject constructor(private val useCase: ChatUseCase) : View
     suspend fun sendMessage(request: ChatRoomRequest): LiveData<Response<Boolean>> =
         useCase.sendMessage(request).asLiveData()
 
+    suspend fun readMessage(sender: String, receiver: String): LiveData<Response<List<ChatRoomResponse>>> =
+        useCase.readMessage(sender, receiver).asLiveData()
 }

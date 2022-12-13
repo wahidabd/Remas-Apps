@@ -12,12 +12,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.wahidabd.remas.core.Response
 import com.wahidabd.remas.data.request.chat.ChatRoomRequest
 import com.wahidabd.remas.databinding.FragmentChatRoomBinding
-import com.wahidabd.remas.utils.Constants
-import com.wahidabd.remas.utils.MySharedPreferences
-import com.wahidabd.remas.utils.myTimeStamp
-import com.wahidabd.remas.utils.setImageUrl
+import com.wahidabd.remas.utils.*
+import com.wahidabd.remas.view.chat.adapter.ChatRoomAdapter
 import com.wahidabd.remas.viewmodel.ChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,7 @@ class ChatRoomFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject lateinit var prefs: MySharedPreferences
+    @Inject lateinit var loading: Loading
     private val args: ChatRoomFragmentArgs by navArgs()
     private val viewModel: ChatViewModel by viewModels()
 
@@ -60,6 +62,34 @@ class ChatRoomFragment : Fragment() {
         }
 
         binding.ivSend.setOnClickListener { sendMessage() }
+        readMessage()
+    }
+
+    private fun readMessage(){
+        val mAdapter = ChatRoomAdapter(prefs.getUser().id.toString())
+        binding.rvChat.apply {
+            adapter = mAdapter
+            val manager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            manager.stackFromEnd = true
+            layoutManager = manager
+            itemAnimator = DefaultItemAnimator()
+        }
+
+        lifecycleScope.launch(Dispatchers.Main){
+            viewModel.readMessage(prefs.getUser().id.toString(), args.userId.toString()).observe(viewLifecycleOwner){ res ->
+                when(res){
+                    is Response.Loading -> {loading.start(requireContext())}
+                    is Response.Error -> {
+                        loading.stop()
+                        quickShowToast(res.e.toString())
+                    }
+                    is Response.Success -> {
+                        loading.stop()
+                        mAdapter.setData = res.data
+                    }
+                }
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

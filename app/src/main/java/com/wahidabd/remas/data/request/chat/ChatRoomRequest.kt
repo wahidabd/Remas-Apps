@@ -11,7 +11,9 @@ data class ChatRoomRequest(
     val sender_image: String,
     val receiver_image: String,
     val message: String,
-    val date: String
+    val date: String,
+    val read: Boolean? = false,
+    var unread: Int? = 0
 ) {
 
     @Exclude
@@ -19,6 +21,9 @@ data class ChatRoomRequest(
         mapOf(
             "id" to id,
             "message" to message,
+            "sender_id" to sender_id,
+            "receiver_id" to receiver_id,
+            "read" to read,
             "date" to date
         )
 
@@ -28,7 +33,8 @@ data class ChatRoomRequest(
             "name" to sender_name,
             "image" to sender_image,
             "message" to message,
-            "date" to date
+            "date" to date,
+            "unread" to unread
         )
 
     fun toReceiver(): Map<String, Any?> =
@@ -37,7 +43,8 @@ data class ChatRoomRequest(
             "name" to receiver_name,
             "image" to receiver_image,
             "message" to message,
-            "date" to date
+            "date" to date,
+            "unread" to unread
         )
 
 }

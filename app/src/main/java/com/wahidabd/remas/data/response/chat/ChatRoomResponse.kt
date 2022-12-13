@@ -1,10 +1,10 @@
 package com.wahidabd.remas.data.response.chat
 
-data class UserChatGroupResponse(
+data class ChatRoomResponse(
     val id: String? = null,
-    val name: String? = null,
-    val image: String? = null,
     val message: String? = null,
+    val sender_id: String? = null,
+    val receiver_id: String? = null,
     val date: String? = null,
-    val unread: Int? = 0
+    val read: Boolean? = false
 )

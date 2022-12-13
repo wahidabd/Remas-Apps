@@ -20,6 +20,7 @@ object Constants {
         const val USER = "user"
         const val CHAT = "chat"
         const val CHAT_ROOM = "_chat_room"
+        const val REPORT = "report"
     }
 
 }

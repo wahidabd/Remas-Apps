@@ -2,6 +2,7 @@ package com.wahidabd.remas.domain.usecase
 
 import com.wahidabd.remas.core.Response
 import com.wahidabd.remas.data.request.chat.ChatRoomRequest
+import com.wahidabd.remas.data.response.chat.ChatRoomResponse
 import com.wahidabd.remas.data.response.chat.UserChatGroupResponse
 import com.wahidabd.remas.domain.repository.ChatRepository
 import kotlinx.coroutines.flow.Flow
@@ -15,4 +16,6 @@ class ChatUseCase @Inject constructor(private val repo: ChatRepository){
     suspend fun sendMessage(request: ChatRoomRequest): Flow<Response<Boolean>> =
         repo.sendMessage(request)
 
+    suspend fun readMessage(sender: String, receiver: String): Flow<Response<List<ChatRoomResponse>>> =
+        repo.readMessage(sender, receiver)
 }

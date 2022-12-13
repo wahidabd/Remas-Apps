@@ -29,14 +29,14 @@
             tools:ignore="RtlSymmetry" />
 
         <ImageView
-            android:id="@+id/img_add_chat"
+            android:id="@+id/iv_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_arrow_back"
-            android:padding="8dp"
+            android:background="@drawable/ripple_round_gray_white"
             android:backgroundTint="@color/shades_blue"
-            app:tint="@color/white"
-            android:background="@drawable/ripple_round_gray_white"/>
+            android:padding="8dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/white" />
 
     </RelativeLayout>
 

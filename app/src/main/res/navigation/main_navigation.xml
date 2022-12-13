@@ -26,7 +26,11 @@
         android:id="@+id/reportFragment"
         android:name="com.wahidabd.remas.view.report.ReportFragment"
         android:label="fragment_report"
-        tools:layout="@layout/fragment_report" />
+        tools:layout="@layout/fragment_report" >
+        <action
+            android:id="@+id/action_reportFragment_to_userReportFragment"
+            app:destination="@id/userReportFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.wahidabd.remas.view.profile.ProfileFragment"
@@ -58,4 +62,18 @@
             android:name="user_image"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/userReportFragment"
+        android:name="com.wahidabd.remas.view.report.UserReportFragment"
+        android:label="fragment_user_report"
+        tools:layout="@layout/fragment_user_report" >
+        <action
+            android:id="@+id/action_userReportFragment_to_createReportFragment"
+            app:destination="@id/createReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createReportFragment"
+        android:name="com.wahidabd.remas.view.report.CreateReportFragment"
+        android:label="fragment_create_report"
+        tools:layout="@layout/fragment_create_report" />
 </navigation>
