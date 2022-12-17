@@ -54,6 +54,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
                 viewRoot.setOnClickListener {
                     listener?.let { listener(data) }
                 }
+
             }
         }
     }

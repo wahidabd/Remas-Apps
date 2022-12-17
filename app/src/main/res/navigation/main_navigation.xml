@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_reportFragment_to_userReportFragment"
             app:destination="@id/userReportFragment" />
+        <action
+            android:id="@+id/action_reportFragment_to_detailReportFragment"
+            app:destination="@id/detailReportFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -75,5 +78,36 @@
         android:id="@+id/createReportFragment"
         android:name="com.wahidabd.remas.view.report.CreateReportFragment"
         android:label="fragment_create_report"
-        tools:layout="@layout/fragment_create_report" />
+        tools:layout="@layout/fragment_create_report" >
+        <argument
+            android:name="user_id"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="user_name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="user_image"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailReportFragment"
+        android:name="com.wahidabd.remas.view.report.DetailReportFragment"
+        android:label="fragment_detail_report"
+        tools:layout="@layout/fragment_detail_report" >
+        <argument
+            android:name="user_id"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="user_name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="user_image"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

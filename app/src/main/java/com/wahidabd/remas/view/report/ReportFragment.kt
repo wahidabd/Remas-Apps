@@ -5,10 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.wahidabd.remas.core.Response
 import com.wahidabd.remas.databinding.FragmentReportBinding
+import com.wahidabd.remas.utils.Loading
 import com.wahidabd.remas.utils.MySharedPreferences
+import com.wahidabd.remas.utils.quickShowToast
+import com.wahidabd.remas.view.chat.adapter.UserListAdapter
+import com.wahidabd.remas.viewmodel.ReportViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -17,6 +28,9 @@ class ReportFragment : Fragment() {
     private var _binding: FragmentReportBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: ReportViewModel by viewModels()
+    private lateinit var mAdapter: UserListAdapter
+    @Inject lateinit var loading: Loading
     @Inject lateinit var prefs: MySharedPreferences
 
     override fun onCreateView(
@@ -31,8 +45,12 @@ class ReportFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // check user role
-        if (prefs.getUser().role == 1) binding.relativeAddReport.visibility = View.GONE
-        else binding.relativeAddReport.visibility = View.VISIBLE
+        if (prefs.getUser().role == 1) {
+            binding.linearAdmin.visibility = View.GONE
+        }else{
+            binding.linearAdmin.visibility = View.VISIBLE
+            setViewAdmin()
+        }
 
         binding.relativeAddReport.setOnClickListener {
             findNavController().navigate(
@@ -40,6 +58,37 @@ class ReportFragment : Fragment() {
             )
         }
 
+        mAdapter = UserListAdapter()
+        binding.rvUser.apply {
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            itemAnimator = DefaultItemAnimator()
+        }
+
+        mAdapter.setOnItemClick {
+           findNavController().navigate(
+               ReportFragmentDirections.actionReportFragmentToDetailReportFragment(it.id, it.name, it.image)
+           )
+        }
+
+    }
+
+    private fun setViewAdmin(){
+        lifecycleScope.launch(Dispatchers.Main){
+            viewModel.getUserDocument().observe(viewLifecycleOwner){ res ->
+                when(res){
+                    is Response.Loading -> {loading.start(requireContext())}
+                    is Response.Error -> {
+                        loading.stop()
+                        quickShowToast(res.e.message.toString())
+                    }
+                    is Response.Success -> {
+                        loading.stop()
+                        mAdapter.setData = res.data
+                    }
+                }
+            }
+        }
     }
 
 }

@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_top"
         android:layout_above="@id/linear_bottom"
-        tools:listitem="@layout/item_chat_left"/>
+        tools:listitem="@layout/item_chat_right"/>
 
     <LinearLayout
         android:id="@+id/linear_bottom"

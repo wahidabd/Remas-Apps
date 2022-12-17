@@ -29,7 +29,7 @@ class FirebaseChatStorage : ChatStorage {
                     if (data != null) list.add(data)
                 }
 
-                trySend(Response.Success(list))
+                trySend(Response.Success(list.sortedByDescending { it.date }))
             }
 
             override fun onCancelled(error: DatabaseError) {
