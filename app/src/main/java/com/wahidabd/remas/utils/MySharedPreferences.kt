@@ -30,7 +30,7 @@ class MySharedPreferences(context: Context) {
         editor.putString(IMAGE, data.image)
         editor.putInt(ROLE, data.role!!)
         editor.putString(ADDRESS, data.address)
-        editor.putInt(AGE, data.age!!)
+        editor.putInt(AGE, data.age ?: 0)
         editor.putString(PHONE, data.phone)
         editor.apply()
     }

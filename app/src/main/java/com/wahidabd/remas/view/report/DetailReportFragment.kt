@@ -1,6 +1,10 @@
 package com.wahidabd.remas.view.report
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +25,7 @@ import com.wahidabd.remas.viewmodel.ReportViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,6 +34,7 @@ class DetailReportFragment : Fragment() {
     private var _binding: FragmentDetailReportBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var mAdapter: ReportAdapter
     @Inject
     lateinit var loading: Loading
     private val args: DetailReportFragmentArgs by navArgs()
@@ -49,16 +55,34 @@ class DetailReportFragment : Fragment() {
         binding.tvName.text = args.userName
         binding.imgAvatar.setImageUrl(args.userImage ?: Constants.STATIC_IMAGE)
 
-        setRecyclerAdapter()
-    }
-
-    private fun setRecyclerAdapter() {
-        val mAdapter = ReportAdapter()
+        mAdapter = ReportAdapter()
         binding.rvDocument.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = DefaultItemAnimator()
         }
+
+        mAdapter.setOnItemClick {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+
+            val uri = Uri.parse(it.file)
+            intent.setDataAndType(uri, "application/pdf")
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+            val newIntent = Intent.createChooser(intent, "Open a file")
+            try {
+                startActivity(newIntent)
+            }catch (e: ActivityNotFoundException){
+                quickShowToast("Tidak menemukan aplikasi untuk membuka file ini!")
+            }
+        }
+
+        setRecyclerAdapter()
+    }
+
+    private fun setRecyclerAdapter() {
+
 
         lifecycleScope.launch(Dispatchers.Main){
             viewModel.getReportByUser(args.userId.toString()).observe(viewLifecycleOwner){ res ->

@@ -1,5 +1,7 @@
 package com.wahidabd.remas.view.report
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +58,10 @@ class ReportAdapter : RecyclerView.Adapter<ReportAdapter.ViewHolder>() {
                 else {
                     tvFileName.visibility = View.VISIBLE
                     tvFileName.text = data.file_name + ".pdf"
+                }
+
+                tvFileName.setOnClickListener {
+                    listener?.let { listener(data) }
                 }
 
                 constraintExpand.setOnClickListener {

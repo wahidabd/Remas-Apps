@@ -23,7 +23,7 @@ data class ProfileRequest(
             "email" to email,
             "age" to age,
             "address" to address,
-            "phone" to address
+            "phone" to phone
         )
 
 }
