@@ -8,4 +8,7 @@ data class User(
     val email: String? = null,
     val image: String? = Constants.STATIC_IMAGE,
     val role: Int? = null,
+    val address: String? = null,
+    val age: Int? = null,
+    val phone: String? = null
 )

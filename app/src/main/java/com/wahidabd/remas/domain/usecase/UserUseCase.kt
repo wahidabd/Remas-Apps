@@ -1,6 +1,7 @@
 package com.wahidabd.remas.domain.usecase
 
 import com.wahidabd.remas.core.Response
+import com.wahidabd.remas.data.request.ProfileRequest
 import com.wahidabd.remas.domain.models.User
 import com.wahidabd.remas.data.request.auth.LoginRequest
 import com.wahidabd.remas.data.request.auth.RegisterRequest
@@ -25,4 +26,5 @@ class UserUseCase @Inject constructor(
 
     suspend fun userList(id: String): Flow<Response<ArrayList<User>>> = repo.userList(id)
 
+    suspend fun editProfile(request: ProfileRequest): Flow<Response<User>> = repo.editProfile(request)
 }

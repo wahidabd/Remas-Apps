@@ -2,6 +2,7 @@ package com.wahidabd.remas.viewmodel
 
 import androidx.lifecycle.*
 import com.wahidabd.remas.core.Response
+import com.wahidabd.remas.data.request.ProfileRequest
 import com.wahidabd.remas.domain.models.User
 import com.wahidabd.remas.data.request.auth.LoginRequest
 import com.wahidabd.remas.data.request.auth.RegisterRequest
@@ -9,6 +10,7 @@ import com.wahidabd.remas.data.response.GenericResponse
 import com.wahidabd.remas.domain.usecase.UserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,4 +34,6 @@ class UserViewModel @Inject constructor(
     suspend fun userList(id: String): LiveData<Response<ArrayList<User>>> =
         useCase.userList(id).asLiveData()
 
+    suspend fun editProfile(request: ProfileRequest): LiveData<Response<User>> =
+        useCase.editProfile(request).asLiveData()
 }

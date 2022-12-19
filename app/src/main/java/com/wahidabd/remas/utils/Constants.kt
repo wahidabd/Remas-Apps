@@ -28,7 +28,8 @@ object Constants {
         const val CHAT_ROOM = "_chat_room"
         const val REPORT = "report"
         const val REPORT_ROOM = "_report_room"
-        const val REPORT_STORAGE = "/reports/"
+        const val REPORT_STORAGE = "reports"
+        const val USER_STORAGE = "images"
     }
 
 }

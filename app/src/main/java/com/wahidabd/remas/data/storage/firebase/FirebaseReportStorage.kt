@@ -22,14 +22,14 @@ class FirebaseReportStorage : ReportStorage {
 
         trySend(Response.Loading())
 
+        request.id = db.push().key.toString()
         if (request.file != null){
             val file = Uri.fromFile(request.file)
-            storage.putFile(file).addOnSuccessListener {
-                storage.downloadUrl.addOnSuccessListener { url ->
+            storage.child(request.id.toString()).putFile(file).addOnSuccessListener {
+                storage.child(request.id.toString()).downloadUrl.addOnSuccessListener { url ->
                     request.file_url = url.toString()
 
                     // set to database
-                    request.id = db.push().key.toString()
                     db.child(request.user_id.toString()).updateChildren(request.toUserMap())
                     db.child(request.user_id.toString()).child(Constants.TABLE.REPORT_ROOM).child(request.id.toString()).setValue(request.toMap())
                         .addOnSuccessListener {

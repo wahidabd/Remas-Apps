@@ -50,6 +50,7 @@ class FirebaseChatStorage : ChatStorage {
             .child(request.id.toString()).setValue(request.toMessage())
             .addOnCompleteListener {
                 db.child(request.receiver_id).child(request.sender_id).updateChildren(request.toSender())
+                db.child(request.sender_id).child(request.receiver_id).updateChildren(request.toReceiver())
 
                 db.child(request.receiver_id).child(request.sender_id).child(Constants.TABLE.CHAT_ROOM)
                     .child(request.id.toString()).setValue(request.toMessage())
@@ -62,7 +63,7 @@ class FirebaseChatStorage : ChatStorage {
                     if (task.isSuccessful){
                         val count = task.result.childrenCount.toInt()
                         request.unread = count
-                        db.child(request.sender_id).child(request.receiver_id).updateChildren(request.toReceiver())
+                        db.child(request.receiver_id).child(request.sender_id).updateChildren(request.toSender())
                     }
                 }
 

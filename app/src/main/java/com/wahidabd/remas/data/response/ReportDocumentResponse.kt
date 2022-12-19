@@ -4,5 +4,6 @@ data class ReportDocumentResponse(
     val id: String? = null,
     val file: String? = null,
     val file_name: String? = null,
-    val body: String? = null
+    val body: String? = null,
+    var expand: Boolean = false
 )

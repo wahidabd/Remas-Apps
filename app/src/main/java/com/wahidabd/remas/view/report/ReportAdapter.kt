@@ -1,6 +1,7 @@
 package com.wahidabd.remas.view.report
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -48,7 +49,19 @@ class ReportAdapter : RecyclerView.Adapter<ReportAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ReportDocumentResponse, listener: ((ReportDocumentResponse) -> Unit)?) {
             with(binding) {
-                binding.fileName.text = data.file_name
+                fileName.text = data.file_name
+                tvBody.text = data.body
+                linearExpand.visibility = if (data.expand) View.VISIBLE else View.GONE
+                if (data.file == null) tvFileName.visibility = View.GONE
+                else {
+                    tvFileName.visibility = View.VISIBLE
+                    tvFileName.text = data.file_name + ".pdf"
+                }
+
+                constraintExpand.setOnClickListener {
+                    data.expand = !data.expand
+                    notifyDataSetChanged()
+                }
             }
         }
     }

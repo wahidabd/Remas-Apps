@@ -1,17 +1,21 @@
 package com.wahidabd.remas.data.storage.firebase
 
+import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.wahidabd.remas.core.Response
+import com.wahidabd.remas.data.request.ProfileRequest
 import com.wahidabd.remas.domain.models.User
 import com.wahidabd.remas.data.request.auth.LoginRequest
 import com.wahidabd.remas.data.request.auth.RegisterRequest
 import com.wahidabd.remas.data.response.GenericResponse
 import com.wahidabd.remas.data.storage.UserStorage
 import com.wahidabd.remas.utils.Constants
+import com.wahidabd.remas.utils.timeStamp
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -143,10 +147,61 @@ class FirebaseUserStorage : UserStorage {
         awaitClose { this.close() }
     }
 
+    override suspend fun editProfile(request: ProfileRequest): Flow<Response<User>> = callbackFlow {
+        trySend(Response.Loading())
+
+        if (request.file != null){
+            val file = Uri.fromFile(request.file)
+            storage.child(request.id).putFile(file).addOnSuccessListener {
+                storage.child(request.id).downloadUrl.addOnSuccessListener { url ->
+                    request.file_url = url.toString()
+
+                    user.child(request.id).updateChildren(request.toMap())
+                        .addOnSuccessListener {
+                            user.child(request.id).addListenerForSingleValueEvent(object : ValueEventListener{
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    if (snapshot.exists()){
+                                        val user = snapshot.getValue(User::class.java)
+                                        if (user != null) trySend(Response.Success(user))
+                                    }
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    trySend(Response.Error(e = Exception(error.message)))
+                                }
+
+                            })
+                        }
+                        .addOnFailureListener { trySend(Response.Error(e = Exception(it.message.toString()))) }
+                }
+            }
+        }else{
+            user.child(request.id).updateChildren(request.toMap())
+                .addOnSuccessListener {
+                    user.child(request.id).addListenerForSingleValueEvent(object : ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            if (snapshot.exists()){
+                                val user = snapshot.getValue(User::class.java)
+                                if (user != null) trySend(Response.Success(user))
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            trySend(Response.Error(e = Exception(error.message)))
+                        }
+
+                    })
+                }
+                .addOnFailureListener { trySend(Response.Error(e = Exception(it.message.toString()))) }
+        }
+
+        awaitClose { this.close() }
+    }
 
 
     companion object {
         private val auth = FirebaseAuth.getInstance()
         private val user = FirebaseDatabase.getInstance().getReference(Constants.TABLE.USER)
+        private val storage = FirebaseStorage.getInstance().getReference(Constants.TABLE.USER_STORAGE)
     }
 }

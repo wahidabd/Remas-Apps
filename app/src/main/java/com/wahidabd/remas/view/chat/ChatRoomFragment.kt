@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.*
 import com.wahidabd.remas.core.Response
 import com.wahidabd.remas.data.request.chat.ChatRoomRequest
 import com.wahidabd.remas.databinding.FragmentChatRoomBinding
@@ -30,6 +31,10 @@ class ChatRoomFragment : Fragment() {
 
     private var _binding: FragmentChatRoomBinding? = null
     private val binding get() = _binding!!
+
+    // set read chat from fragment
+    private lateinit var stateListener: ValueEventListener
+    private lateinit var resetStateListener: ValueEventListener
 
     @Inject lateinit var prefs: MySharedPreferences
     @Inject lateinit var loading: Loading
@@ -113,4 +118,38 @@ class ChatRoomFragment : Fragment() {
         }
     }
 
+    private val dbReference: DatabaseReference = FirebaseDatabase.getInstance().getReference(Constants.TABLE.CHAT)
+    override fun onStart() {
+        super.onStart()
+        stateListener = object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (i in snapshot.children){
+                    i.child("read").ref.setValue(true)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        }
+
+        dbReference.child(args.userId.toString()).child(prefs.getUser().id.toString())
+            .child(Constants.TABLE.CHAT_ROOM).addValueEventListener(stateListener)
+
+        resetStateListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.child("unread").ref.setValue(0)
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        }
+
+        dbReference.child(prefs.getUser().id.toString()).child(args.userId.toString())
+            .addValueEventListener(resetStateListener)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        dbReference.child(args.userId.toString()).child(prefs.getUser().id.toString())
+            .child(Constants.TABLE.CHAT_ROOM).removeEventListener(stateListener)
+
+        dbReference.child(prefs.getUser().id.toString()).child(args.userId.toString())
+            .removeEventListener(resetStateListener)
+    }
 }

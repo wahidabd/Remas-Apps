@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".view.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
 
-</FrameLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:gravity="center_vertical"
+           android:layout_marginTop="12dp"
+           android:layout_marginHorizontal="24dp">
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:textSize="18sp"
+               android:fontFamily="@font/poppins_semibold"
+               android:textColor="@color/black"
+               android:text="Profile"/>
+
+           <ImageView
+               android:id="@+id/iv_logout"
+               android:layout_width="34dp"
+               android:layout_height="34dp"
+               android:src="@drawable/ic_baseline_logout_24"
+               android:padding="4dp"/>
+
+       </LinearLayout>
+
+
+
+       <de.hdodenhof.circleimageview.CircleImageView
+           android:id="@+id/iv_avatar"
+           android:layout_width="120dp"
+           android:layout_height="120dp"
+           android:layout_marginTop="12dp"
+           android:layout_gravity="center"
+           android:src="@tools:sample/avatars"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Nama"
+           android:fontFamily="@font/poppins_medium"
+           android:textSize="14sp"
+           android:layout_marginHorizontal="24dp"
+           android:textColor="@color/black"
+           android:layout_marginTop="24dp"/>
+
+       <EditText
+           android:id="@+id/edt_name"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center_vertical"
+           android:layout_marginTop="4dp"
+           android:paddingHorizontal="10dp"
+           android:paddingVertical="6dp"
+           android:fontFamily="@font/poppins_medium"
+           android:textSize="14sp"
+           android:hint="-"
+           android:textColorHint="@color/black_70"
+           android:textColor="@color/black"
+           android:layout_marginHorizontal="24dp"
+           android:background="@drawable/bg_rectangle_white_12"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Umur"
+           android:fontFamily="@font/poppins_medium"
+           android:textSize="14sp"
+           android:layout_marginHorizontal="24dp"
+           android:textColor="@color/black"
+           android:layout_marginTop="18dp"/>
+
+       <EditText
+           android:id="@+id/edt_age"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center_vertical"
+           android:layout_marginTop="4dp"
+           android:paddingHorizontal="10dp"
+           android:paddingVertical="6dp"
+           android:fontFamily="@font/poppins_medium"
+           android:textSize="14sp"
+           android:hint="-"
+           android:inputType="numberDecimal"
+           android:textColorHint="@color/black_70"
+           android:textColor="@color/black"
+           android:layout_marginHorizontal="24dp"
+           android:background="@drawable/bg_rectangle_white_12"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Domisili"
+           android:fontFamily="@font/poppins_medium"
+           android:textSize="14sp"
+           android:layout_marginHorizontal="24dp"
+           android:textColor="@color/black"
+           android:layout_marginTop="18dp"/>
+
+       <EditText
+           android:id="@+id/edt_address"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center_vertical"
+           android:layout_marginTop="4dp"
+           android:paddingHorizontal="10dp"
+           android:paddingVertical="6dp"
+           android:fontFamily="@font/poppins_medium"
+           android:textSize="14sp"
+           android:hint="-"
+           android:textColorHint="@color/black_70"
+           android:textColor="@color/black"
+           android:layout_marginHorizontal="24dp"
+           android:background="@drawable/bg_rectangle_white_12"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="No. HP"
+           android:fontFamily="@font/poppins_medium"
+           android:textSize="14sp"
+           android:layout_marginHorizontal="24dp"
+           android:textColor="@color/black"
+           android:layout_marginTop="18dp"/>
+
+       <EditText
+           android:id="@+id/edt_phone"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center_vertical"
+           android:layout_marginTop="4dp"
+           android:paddingHorizontal="10dp"
+           android:paddingVertical="6dp"
+           android:fontFamily="@font/poppins_medium"
+           android:textSize="14sp"
+           android:hint="-"
+           android:inputType="numberDecimal"
+           android:textColorHint="@color/black_70"
+           android:textColor="@color/black"
+           android:layout_marginHorizontal="24dp"
+           android:background="@drawable/bg_rectangle_white_12"/>
+
+       <Button
+           android:id="@+id/btn_save"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Simpan"
+           android:textColor="@color/white"
+           android:layout_gravity="center"
+           android:layout_marginTop="24dp"
+           android:layout_marginBottom="12dp"
+           android:textAllCaps="false"/>
+
+   </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

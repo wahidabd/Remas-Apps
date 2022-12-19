@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/background"
+    android:orientation="vertical"
     tools:context=".view.report.ReportFragment">
 
     <LinearLayout
         android:id="@+id/linear_admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/relative_add_report"
@@ -39,10 +40,10 @@
                 android:id="@+id/img_add_chat"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_add"
+                android:background="@drawable/ripple_round_gray_white"
                 android:padding="8dp"
-                app:tint="@color/main_blue"
-                android:background="@drawable/ripple_round_gray_white"/>
+                android:src="@drawable/ic_add"
+                app:tint="@color/main_blue" />
 
         </RelativeLayout>
 
@@ -50,9 +51,67 @@
             android:id="@+id/rv_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_user_list"
             android:layout_marginHorizontal="16dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            tools:listitem="@layout/item_user_list" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="16dp"
+            android:padding="6dp"
+            android:elevation="4dp"
+            android:background="@drawable/bg_rectangle_white_50">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                tools:src="@color/main_blue"/>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_semibold"
+                tools:text="Abd. Wahid"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_round_top_white_12"
+            android:paddingHorizontal="12dp"
+            android:layout_marginHorizontal="24dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_document"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="6dp"
+                android:paddingBottom="6dp"
+                tools:listitem="@layout/item_report_document"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

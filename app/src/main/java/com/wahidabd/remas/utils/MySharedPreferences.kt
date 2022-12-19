@@ -14,6 +14,9 @@ class MySharedPreferences(context: Context) {
         private const val IMAGE = "image"
         private const val ROLE = "role"
         private const val LOGIN = "login"
+        private const val ADDRESS = "address"
+        private const val AGE = "age"
+        private const val PHONE = "phone"
         private const val FCM = "fcm"
     }
 
@@ -26,6 +29,9 @@ class MySharedPreferences(context: Context) {
         editor.putString(EMAIL, data.email)
         editor.putString(IMAGE, data.image)
         editor.putInt(ROLE, data.role!!)
+        editor.putString(ADDRESS, data.address)
+        editor.putInt(AGE, data.age!!)
+        editor.putString(PHONE, data.phone)
         editor.apply()
     }
 
@@ -35,7 +41,10 @@ class MySharedPreferences(context: Context) {
             name = prefs.getString(NAME, "").toString(),
             email = prefs.getString(EMAIL, "").toString(),
             image = prefs.getString(IMAGE, "").toString(),
-            role = prefs.getInt(ROLE, 0)
+            role = prefs.getInt(ROLE, 0),
+            address = prefs.getString(ADDRESS, "").toString(),
+            age = prefs.getInt(AGE, 0),
+            phone = prefs.getString(PHONE, "").toString()
         )
 
     fun setLogin(value: Boolean){
